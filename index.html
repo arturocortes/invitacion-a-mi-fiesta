@@ -150,6 +150,38 @@
             font-weight: 900;
         }
 
+        /* Contenedor para fotos de personajes debajo de la edad */
+        .characters-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .character-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            border: 4px solid #ffff00;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
+            background: #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .character-photo:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 25px rgba(255, 255, 0, 0.9);
+        }
+
+        .character-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .content {
             padding: 30px 30px 50px;
             text-align: center;
@@ -249,28 +281,6 @@
             text-shadow: 1px 1px 2px #000;
         }
 
-        .rsvp-button {
-            background: linear-gradient(45deg, #ffff00, #ffcc00);
-            color: #000;
-            padding: 18px 40px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.4rem;
-            font-weight: 900;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 7px 20px rgba(255, 204, 0, 0.7);
-            user-select: none;
-            display: block;
-            margin: 0 auto;
-            letter-spacing: 2px;
-        }
-
-        .rsvp-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(255, 204, 0, 0.9);
-        }
-
         /* Animación de autos */
         .car-animation-container {
             position: relative;
@@ -366,6 +376,15 @@
                 font-size: 3.5rem;
             }
 
+            .characters-container {
+                gap: 20px;
+            }
+
+            .character-photo {
+                width: 70px;
+                height: 70px;
+            }
+
             .countdown-display {
                 flex-wrap: wrap;
             }
@@ -402,6 +421,16 @@
 
             <div class="name" id="childName">MATEO</div>
             <div class="age" id="childAge">7</div>
+            
+            <div class="characters-container">
+                <div class="character-photo lightning-mcqueen">
+                    <img src="https://via.placeholder.com/80x80/ff0000/ffffff?text=RAYO" alt="Rayo McQueen" id="lightningPhoto" />
+                </div>
+                
+                <div class="character-photo mater">
+                    <img src="https://via.placeholder.com/80x80/8B4513/ffffff?text=MATE" alt="Mate" id="materPhoto" />
+                </div>
+            </div>
         </div>
 
         <div class="content">
@@ -411,19 +440,19 @@
                 <div class="countdown-title">🏁 TIEMPO PARA LA CARRERA 🏁</div>
                 <div class="countdown-display" id="countdown">
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="days">30</span>
+                        <span class="countdown-number" id="days">00</span>
                         <span class="countdown-label">DÍAS</span>
                     </div>
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="hours">2</span>
+                        <span class="countdown-number" id="hours">00</span>
                         <span class="countdown-label">HORAS</span>
                     </div>
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="minutes">30</span>
+                        <span class="countdown-number" id="minutes">00</span>
                         <span class="countdown-label">MIN</span>
                     </div>
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="seconds">15</span>
+                        <span class="countdown-number" id="seconds">00</span>
                         <span class="countdown-label">SEG</span>
                     </div>
                 </div>
@@ -447,10 +476,6 @@
                     <strong>RSVP:</strong> <span id="phoneNumber">(56) 1234-5678</span>
                 </div>
             </div>
-
-            <button class="rsvp-button" onclick="confirmAttendance()" aria-label="Confirmar asistencia a la fiesta">
-                🏆 ¡CONFIRMAR ASISTENCIA! 🏆
-            </button>
         </div>
 
         <div class="track" aria-hidden="true"></div>
@@ -466,23 +491,112 @@
         const partyConfig = {
             childName: "MATEO",
             age: "7",
-            date: "2024-07-16", // YYYY-MM-DD
+            date: "2024-12-25", // YYYY-MM-DD (Cambiado a una fecha futura para ver el countdown)
             time: "15:30", // HH:MM (formato 24h)
             displayTime: "3:30 P.M.",
             location: "Calle Cualquiera 123, Cualquier Lugar",
             phone: "(56) 1234-5678",
-            photoUrl: "https://via.placeholder.com/130x130/cccccc/666666?text=FOTO"
+            photoUrl: "https://via.placeholder.com/130x130/cccccc/666666?text=MATEO",
+            lightningPhotoUrl: "https://via.placeholder.com/80x80/ff0000/ffffff?text=RAYO",
+            materPhotoUrl: "https://via.placeholder.com/80x80/8B4513/ffffff?text=MATE"
         };
 
-        // Aplicar configuración
-        document.getElementById('childName').textContent = partyConfig.childName;
-        document.getElementById('childAge').textContent = partyConfig.age;
-        document.getElementById('partyDate').textContent = formatDate(partyConfig.date);
-        document.getElementById('partyTime').textContent = partyConfig.displayTime;
-        document.getElementById('partyLocation').textContent = partyConfig.location;
-        document.getElementById('phoneNumber').textContent = partyConfig.phone;
-        document.getElementById('childPhoto').src = partyConfig.photoUrl;
+        // Variables globales para el countdown
+        let countdownInterval;
+        let targetDate;
+
+        // Aplicar configuración inicial
+        function initializeInvitation() {
+            document.getElementById('childName').textContent = partyConfig.childName;
+            document.getElementById('childAge').textContent = partyConfig.age;
+            document.getElementById('partyDate').textContent = formatDate(partyConfig.date);
+            document.getElementById('partyTime').textContent = partyConfig.displayTime;
+            document.getElementById('partyLocation').textContent = partyConfig.location;
+            document.getElementById('phoneNumber').textContent = partyConfig.phone;
+            document.getElementById('childPhoto').src = partyConfig.photoUrl;
+            document.getElementById('lightningPhoto').src = partyConfig.lightningPhotoUrl;
+            document.getElementById('materPhoto').src = partyConfig.materPhotoUrl;
+
+            // Configurar fecha objetivo para el countdown
+            targetDate = new Date(partyConfig.date + 'T' + partyConfig.time + ':00');
+            
+            // Iniciar countdown
+            startCountdown();
+        }
 
         function formatDate(dateString) {
             const date = new Date(dateString);
-            const months
+            const months = [
+                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+            return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate.getTime() - now;
+
+            // Si ya pasó la fecha
+            if (distance < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                
+                // Cambiar el título del countdown
+                document.querySelector('.countdown-title').textContent = '🎉 ¡LA FIESTA YA COMENZÓ! 🎉';
+                return;
+            }
+
+            // Calcular tiempo restante
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Actualizar display con formato de 2 dígitos
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        function startCountdown() {
+            // Actualizar inmediatamente
+            updateCountdown();
+            
+            // Limpiar interval anterior si existe
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            
+            // Actualizar cada segundo
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        // Manejo de visibilidad de la página para mantener sincronización
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                // Cuando la página vuelve a ser visible, actualizar inmediatamente
+                updateCountdown();
+            }
+        });
+
+        // Manejar cambio de foco de la ventana
+        window.addEventListener('focus', function() {
+            updateCountdown();
+        });
+
+        // Inicializar cuando la página carga
+        document.addEventListener('DOMContentLoaded', initializeInvitation);
+
+        // Backup: inicializar si DOMContentLoaded ya pasó
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeInvitation);
+        } else {
+            initializeInvitation();
+        }
+    </script>
+</body>
+</html>
