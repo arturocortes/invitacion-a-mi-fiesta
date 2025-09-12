@@ -119,6 +119,9 @@
             overflow: hidden;
             box-shadow: 0 0 20px #ffff00;
             background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .photo-circle img {
@@ -131,6 +134,20 @@
 
         .photo-circle img:hover {
             transform: scale(1.05);
+        }
+
+        /* Placeholder para cuando no hay imagen */
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff4444, #cc0000);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #ffff00;
+            text-shadow: 2px 2px 4px #000;
+            font-weight: 900;
         }
 
         .name {
@@ -416,7 +433,8 @@
             </div>
 
             <div class="photo-circle" aria-label="Foto del cumpleañero">
-                <img src="Niño-xd.jpg" alt="Niño-xd.jpg" id="childPhoto" />
+                <img src="" alt="Foto de Mateo" id="childPhoto" style="display: none;" />
+                <div class="photo-placeholder" id="photoPlaceholder">👦</div>
             </div>
 
             <div class="name" id="childName">MATEO</div>
@@ -440,19 +458,19 @@
                 <div class="countdown-title">🏁 TIEMPO PARA LA CARRERA 🏁</div>
                 <div class="countdown-display" id="countdown">
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="days">15</span>
+                        <span class="countdown-number" id="days">05</span>
                         <span class="countdown-label">DÍAS</span>
                     </div>
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="hours">4</span>
+                        <span class="countdown-number" id="hours">00</span>
                         <span class="countdown-label">HORAS</span>
                     </div>
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="minutes">30</span>
+                        <span class="countdown-number" id="minutes">00</span>
                         <span class="countdown-label">MIN</span>
                     </div>
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="seconds">15</span>
+                        <span class="countdown-number" id="seconds">00</span>
                         <span class="countdown-label">SEG</span>
                     </div>
                 </div>
@@ -461,7 +479,7 @@
             <div class="details">
                 <div class="detail-item">
                     <span class="detail-icon" aria-hidden="true">📅</span>
-                    <strong>Fecha:</strong> <span id="partyDate">Julio 16, 2024</span>
+                    <strong>Fecha:</strong> <span id="partyDate">Septiembre 17, 2025</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-icon" aria-hidden="true">⏰</span>
@@ -491,12 +509,12 @@
         const partyConfig = {
             childName: "MATEO",
             age: "7",
-            date: "2024-12-25", // YYYY-MM-DD (Cambiado a una fecha futura para ver el countdown)
+            date: "2025-09-17", // YYYY-MM-DD (5 días desde hoy)
             time: "15:30", // HH:MM (formato 24h)
             displayTime: "3:30 P.M.",
             location: "Calle Cualquiera 123, Cualquier Lugar",
-            phone: "(56) 1234-5678",
-            photoUrl: "https://via.placeholder.com/130x130/cccccc/666666?text=MATEO",
+            phone: "(56) 1070-3139",
+            photoUrl: "", // Dejar vacío si no tienes imagen
             lightningPhotoUrl: "https://via.placeholder.com/80x80/ff0000/ffffff?text=RAYO",
             materPhotoUrl: "https://via.placeholder.com/80x80/8B4513/ffffff?text=MATE"
         };
@@ -513,7 +531,26 @@
             document.getElementById('partyTime').textContent = partyConfig.displayTime;
             document.getElementById('partyLocation').textContent = partyConfig.location;
             document.getElementById('phoneNumber').textContent = partyConfig.phone;
-            document.getElementById('childPhoto').src = partyConfig.photoUrl;
+            
+            // Manejar la foto del niño
+            const childPhoto = document.getElementById('childPhoto');
+            const photoPlaceholder = document.getElementById('photoPlaceholder');
+            
+            if (partyConfig.photoUrl && partyConfig.photoUrl.trim() !== '') {
+                childPhoto.src = partyConfig.photoUrl;
+                childPhoto.style.display = 'block';
+                photoPlaceholder.style.display = 'none';
+                
+                // Manejar error de carga de imagen
+                childPhoto.onerror = function() {
+                    this.style.display = 'none';
+                    photoPlaceholder.style.display = 'flex';
+                };
+            } else {
+                childPhoto.style.display = 'none';
+                photoPlaceholder.style.display = 'flex';
+            }
+            
             document.getElementById('lightningPhoto').src = partyConfig.lightningPhotoUrl;
             document.getElementById('materPhoto').src = partyConfig.materPhotoUrl;
 
@@ -546,6 +583,7 @@
                 
                 // Cambiar el título del countdown
                 document.querySelector('.countdown-title').textContent = '🎉 ¡LA FIESTA YA COMENZÓ! 🎉';
+                clearInterval(countdownInterval);
                 return;
             }
 
@@ -563,13 +601,13 @@
         }
 
         function startCountdown() {
-            // Actualizar inmediatamente
-            updateCountdown();
-            
             // Limpiar interval anterior si existe
             if (countdownInterval) {
                 clearInterval(countdownInterval);
             }
+            
+            // Actualizar inmediatamente
+            updateCountdown();
             
             // Actualizar cada segundo
             countdownInterval = setInterval(updateCountdown, 1000);
@@ -586,6 +624,13 @@
         // Manejar cambio de foco de la ventana
         window.addEventListener('focus', function() {
             updateCountdown();
+        });
+
+        // Limpiar interval cuando se cierra la página
+        window.addEventListener('beforeunload', function() {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
         });
 
         // Inicializar cuando la página carga
