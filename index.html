@@ -817,7 +817,296 @@
             <div class="name" id="childName">MATEO</div>
             <div class="age" id="childAge">7</div>
             
-            <div class="characters-container">
-                <div class="character-photo lightning-mcqueen">
-                    <img src="RYP.jpg" alt="Rayo McQueen" id="lightningPhoto" />
+
+        </div>
+
+        <div class="content">
+            <div class="title">¡ESTÁS INVITADO A MI FIESTA!</div>
+
+            <div class="countdown" aria-live="polite" aria-atomic="true">
+                <div class="countdown-title">🏁 TIEMPO PARA LA CARRERA 🏁</div>
+                <div class="countdown-display" id="countdown">
+                    <div class="countdown-unit">
+                        <span class="countdown-number" id="days">05</span>
+                        <span class="countdown-label">DÍAS</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">HORAS</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">MIN</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">SEG</span>
+                    </div>
                 </div>
+            </div>
+
+            <div class="details">
+                <div class="detail-item">
+                    <span class="detail-icon" aria-hidden="true">📅</span>
+                    <strong>Fecha:</strong> <span id="partyDate">Septiembre 17, 2025</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon" aria-hidden="true">⏰</span>
+                    <strong>Hora:</strong> <span id="partyTime">3:30 P.M.</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon" aria-hidden="true">📍</span>
+                    <strong>Lugar:</strong> <span id="partyLocation">Calle Cualquiera 123, Cualquier Lugar</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-icon" aria-hidden="true">🗺️</span>
+                    <strong>Ver en Maps:</strong> 
+                    <a href="#" id="mapsButton" class="maps-button" target="_blank" rel="noopener">
+                        <span class="maps-icon">📍</span>
+                        <span>Abrir Google Maps</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Galería de imágenes Cars -->
+            <div class="cars-gallery" aria-label="Galería de Cars">
+                <div class="cars-image">
+                    <img src="cars-logo.jpg" alt="Cars Logo" id="carsImage1" style="display: none;" />
+                    <div class="cars-placeholder">🏎️</div>
+                </div>
+                <div class="cars-image">
+                    <img src="cars-logo.jpg" alt="Cars Logo" id="carsImage2" style="display: none;" />
+                    <div class="cars-placeholder">🏁</div>
+                </div>
+                <div class="cars-image">
+                    <img src="cars-logo.jpg" alt="Cars Logo" id="carsImage3" style="display: none;" />
+                    <div class="cars-placeholder">🏎️</div>
+                </div>
+                <div class="cars-image">
+                    <img src="cars-logo.jpg" alt="Cars Logo" id="carsImage4" style="display: none;" />
+                    <div class="cars-placeholder">🏁</div>
+                </div>
+                <div class="cars-image">
+                    <img src="cars-logo.jpg" alt="Cars Logo" id="carsImage5" style="display: none;" />
+                    <div class="cars-placeholder">🏎️</div>
+                </div>
+                <div class="cars-image">
+                    <img src="cars-logo.jpg" alt="Cars Logo" id="carsImage6" style="display: none;" />
+                    <div class="cars-placeholder">🏁</div>
+                </div>
+                <div class="cars-image">
+                    <img src="cars-logo.jpg" alt="Cars Logo" id="carsImage7" style="display: none;" />
+                    <div class="cars-placeholder">🏎️</div>
+                </div>
+                <div class="cars-image">
+                    <img src="cars-logo.jpg" alt="Cars Logo" id="carsImage8" style="display: none;" />
+                    <div class="cars-placeholder">🏁</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="track" aria-hidden="true"></div>
+
+        <div class="car-animation-container" aria-hidden="true">
+            <!-- Carros animados -->
+            <img src="MTP.jpg" alt="Mate" class="car mate" />
+            <img src="RYP.jpg" alt="Rayo McQueen" class="car rayo" />
+        </div>
+    </div>
+
+    <script>
+        // Configuración de la fiesta (EDITABLE)
+        const partyConfig = {
+            childName: "MATEO",
+            age: "7",
+            date: "2025-09-17", // YYYY-MM-DD (5 días desde hoy)
+            time: "15:30", // HH:MM (formato 24h)
+            displayTime: "3:30 P.M.",
+            location: "Calle Cualquiera 123, Cualquier Lugar",
+            photoUrl: "Niño-xd.jpg", // URL de la foto del niño
+            // Imágenes de los personajes:
+            lightningPhotoUrl: "RY.jpg",
+            materPhotoUrl: "MT.jpg",
+            // Nueva imagen de Cars para la galería:
+            carsLogoUrl: "cars-logo.jpg"
+        };
+
+        // Variables globales para el countdown
+        let countdownInterval;
+        let targetDate;
+
+        // Función para crear partículas de velocidad
+        function createSpeedParticles() {
+            const container = document.getElementById('speedParticles');
+            
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.left = '-100px';
+                particle.style.width = (Math.random() * 100 + 50) + 'px';
+                particle.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                particle.style.opacity = Math.random() * 0.6 + 0.2;
+                
+                container.appendChild(particle);
+                
+                // Remover partícula después de la animación
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 3000);
+            }
+            
+            // Crear partículas cada cierto tiempo
+            setInterval(createParticle, 800);
+        }
+
+        // Aplicar configuración inicial
+        function initializeInvitation() {
+            document.getElementById('childName').textContent = partyConfig.childName;
+            document.getElementById('childAge').textContent = partyConfig.age;
+            document.getElementById('partyDate').textContent = formatDate(partyConfig.date);
+            document.getElementById('partyTime').textContent = partyConfig.displayTime;
+            document.getElementById('partyLocation').textContent = partyConfig.location;
+            
+            // Crear enlace de Google Maps
+            const mapsButton = document.getElementById('mapsButton');
+            const encodedLocation = encodeURIComponent(partyConfig.location);
+            mapsButton.href = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
+            
+            // Manejar la foto del niño
+            const childPhoto = document.getElementById('childPhoto');
+            const photoPlaceholder = document.getElementById('photoPlaceholder');
+            
+            if (partyConfig.photoUrl && partyConfig.photoUrl.trim() !== '') {
+                childPhoto.src = partyConfig.photoUrl;
+                childPhoto.style.display = 'block';
+                photoPlaceholder.style.display = 'none';
+                
+                // Manejar error de carga de imagen
+                childPhoto.onerror = function() {
+                    this.style.display = 'none';
+                    photoPlaceholder.style.display = 'flex';
+                };
+            } else {
+                childPhoto.style.display = 'none';
+                photoPlaceholder.style.display = 'flex';
+            }
+            
+            // Configurar imágenes de personajes
+            document.getElementById('lightningPhoto').src = partyConfig.lightningPhotoUrl;
+            document.getElementById('materPhoto').src = partyConfig.materPhotoUrl;
+            
+            // Configurar imágenes de la galería Cars
+            for (let i = 1; i <= 8; i++) {
+                const img = document.getElementById(`carsImage${i}`);
+                const placeholder = img.nextElementSibling;
+                
+                if (partyConfig.carsLogoUrl && partyConfig.carsLogoUrl.trim() !== '') {
+                    img.src = partyConfig.carsLogoUrl;
+                    img.style.display = 'block';
+                    placeholder.style.display = 'none';
+                    
+                    // Manejar error de carga de imagen
+                    img.onerror = function() {
+                        this.style.display = 'none';
+                        placeholder.style.display = 'flex';
+                    };
+                } else {
+                    img.style.display = 'none';
+                    placeholder.style.display = 'flex';
+                }
+            }
+
+            // Configurar fecha objetivo para el countdown
+            targetDate = new Date(partyConfig.date + 'T' + partyConfig.time + ':00');
+            
+            // Iniciar countdown
+            startCountdown();
+            
+            // Crear partículas de velocidad
+            createSpeedParticles();
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const months = [
+                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+            return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate.getTime() - now;
+
+            // Si ya pasó la fecha
+            if (distance < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                
+                // Cambiar el título del countdown
+                document.querySelector('.countdown-title').textContent = '🎉 ¡LA FIESTA YA COMENZÓ! 🎉';
+                clearInterval(countdownInterval);
+                return;
+            }
+
+            // Calcular tiempo restante
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Actualizar display con formato de 2 dígitos
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        function startCountdown() {
+            // Limpiar interval anterior si existe
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            
+            // Actualizar inmediatamente
+            updateCountdown();
+            
+            // Actualizar cada segundo
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        // Manejo de visibilidad de la página para mantener sincronización
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                // Cuando la página vuelve a ser visible, actualizar inmediatamente
+                updateCountdown();
+            }
+        });
+
+        // Manejar cambio de foco de la ventana
+        window.addEventListener('focus', function() {
+            updateCountdown();
+        });
+
+        // Limpiar interval cuando se cierra la página
+        window.addEventListener('beforeunload', function() {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+        });
+
+        // Inicializar cuando la página carga
+        document.addEventListener('DOMContentLoaded', initializeInvitation);
+
+        // Backup: inicializar si DOMContentLoaded ya pasó
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeInvitation);
+        } else {
+            initializeInvitation();
+        }
