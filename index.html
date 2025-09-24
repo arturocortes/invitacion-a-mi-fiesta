@@ -167,8 +167,8 @@
         }
         .maps-button:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 25px rgba(66,133,244,0.6); border-color:#fff; }
 
-        .car-animation-container { position: relative; height: 120px; margin-top: -20px; overflow: visible; pointer-events: none; }
-        .car { position: absolute; bottom: 0; width: 120px; height: auto; filter: drop-shadow(0 0 5px #ff0000); animation-timing-function: linear; user-select:none; }
+        .car-animation-container { position: relative; height: 160px; margin-top: -20px; overflow: visible; pointer-events: none; }
+        .car { position: absolute; bottom: 0; width: 180px; height: auto; filter: drop-shadow(0 0 5px #ff0000); animation-timing-function: linear; user-select:none; }
         .car.mate { left: -150px; animation: driveMateEnhanced 10s linear infinite; z-index:1001; }
         .car.rayo { left: -200px; bottom: 10px; animation: driveRayoEnhanced 8s linear infinite; z-index:1002; }
 
@@ -209,8 +209,8 @@
             .name { font-size: 2.5rem; letter-spacing: 2px; }
             .age { font-size: 4rem; }
             .countdown-number { font-size: 2.2rem; }
-            .car { width: 110px; }
-            .car-animation-container { height: 110px; margin-top: -20px; }
+            .car { width: 150px; }
+            .car-animation-container { height: 140px; margin-top: -20px; }
             .title { font-size: 1.8rem; letter-spacing: 1px; }
             .extra-photo-box { width: 110px; height: 110px; }
             .photo-circle { width: 120px; height: 120px; }
@@ -222,6 +222,8 @@
             .content { padding: 30px 25px 45px; }
             .details { padding: 25px 20px; font-size: 1.1rem; }
             .maps-button { padding: 10px 16px; font-size: 1rem; }
+            .car { width: 130px; }
+            .car-animation-container { height: 120px; }
         }
     </style>
 </head>
@@ -331,8 +333,8 @@
             photoUrl: "Niño-xd.jpg",      // foto principal
             extraPhoto1: "MTP.jpg",       // recuadro izquierdo (si quieres)
             extraPhoto2: "RYP.jpg",       // recuadro derecho (si quieres)
-            carMaterUrl: "MTP.jpg",
-            carRayoUrl: "RYP.jpg",
+            carMaterUrl: "LogoMateo.png",
+            carRayoUrl: "LogoMateo.png",
             mapsUrl: ""                   // PEGA AQUÍ la URL EXACTA de Google Maps (https://...) o deja vacío para usar la dirección de texto
         };
 
@@ -447,9 +449,9 @@
                 document.getElementById('extraPlaceholder2').style.display = 'none';
             }
 
-            // carros animados (src)
-            const LogoMateo.png = document.getElementById('carMater');
-            const LogoMateo.png = document.getElementById('carRayo');
+            // carros animados (src) - ARREGLÉ EL ERROR AQUÍ
+            const carMater = document.getElementById('carMater');
+            const carRayo = document.getElementById('carRayo');
             if (partyConfig.carMaterUrl) carMater.src = partyConfig.carMaterUrl;
             if (partyConfig.carRayoUrl) carRayo.src = partyConfig.carRayoUrl;
 
