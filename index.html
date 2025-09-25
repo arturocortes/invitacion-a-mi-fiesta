@@ -41,26 +41,11 @@
 
         .header {
             background: linear-gradient(45deg, #ff0000, #cc0000);
-            padding: 30px 20px 60px;
+            padding: 30px 20px 20px;
             text-align: center;
             position: relative;
             overflow: visible;
             box-shadow: inset 0 -10px 20px rgba(255, 255, 0, 0.3);
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('LogoMateo.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0.3;
-            z-index: 1;
         }
 
         .racing-flags {
@@ -124,13 +109,19 @@
             display: none; /* Oculto porque se reemplaza con la imagen principal */
         }
 
+        /* Sección principal de la imagen - SIN fondo para que se vea nítida */
+        .main-cars-section {
+            background: #111;
+            padding: 20px;
+            margin: 0;
+        }
+
         /* Imagen principal de Cars */
         .main-cars-image {
             width: 100%;
             max-width: 500px;
-            margin: 20px auto;
+            margin: 0 auto;
             position: relative;
-            z-index: 10;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -140,28 +131,28 @@
             width: 100%;
             height: auto;
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+            box-shadow: 0 0 25px rgba(255, 255, 0, 0.6);
+            /* Sin filtros ni efectos que puedan difuminar */
         }
 
         .main-image-placeholder {
             width: 100%;
             height: 200px;
-            background: linear-gradient(45deg, #ff0000, #cc0000);
+            background: linear-gradient(45deg, #333, #555);
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
-            border: 3px solid #ffff00;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+            border: 2px dashed #ffff00;
         }
 
         .placeholder-text {
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             color: #ffff00;
-            text-shadow: 3px 3px 0 #000;
-            font-weight: 900;
+            text-shadow: 1px 1px 2px #000;
+            font-weight: 700;
             text-align: center;
-            letter-spacing: 2px;
         }
 
         /* NUEVO: contenedor para las 2 imágenes cuadradas (debajo del número) */
@@ -276,21 +267,23 @@
             .car-animation-container { height: 140px; margin-top: -20px; }
             .title { font-size: 1.8rem; letter-spacing: 1px; }
             .photo-circle { width: 120px; height: 120px; }
-            .main-cars-image { max-width: 100%; margin: 15px auto; }
+            .main-cars-section { padding: 15px; }
+            .main-cars-image { max-width: 100%; }
             .main-image-placeholder { height: 150px; }
-            .placeholder-text { font-size: 2rem; }
+            .placeholder-text { font-size: 1.2rem; }
         }
 
         @media (max-width: 480px) {
             .flag { width: 60px; height: 40px; }
-            .photo-circle { width: 120px; height: 120px; }
+            .photo-circle { width: 100px; height: 100px; }
             .content { padding: 30px 25px 45px; }
             .details { padding: 25px 20px; font-size: 1.1rem; }
             .maps-button { padding: 10px 16px; font-size: 1rem; }
             .car { width: 130px; }
             .car-animation-container { height: 120px; }
+            .main-cars-section { padding: 10px; }
             .main-image-placeholder { height: 120px; }
-            .placeholder-text { font-size: 1.5rem; }
+            .placeholder-text { font-size: 1rem; }
         }
     </style>
 </head>
@@ -312,11 +305,14 @@
                 <div class="photo-placeholder" id="photoPlaceholder">👦</div>
             </div>
 
-            <!-- Imagen principal de Cars con MATEO -->
+        </div>
+
+        <!-- Imagen principal de Cars - FUERA del header para que se vea nítida -->
+        <div class="main-cars-section">
             <div class="main-cars-image">
-                <img src="LogoMateo.png" alt="MATEO Mis 7 Años - Cars" id="mainCarsImage" style="display: none;" />
-                <div class="main-image-placeholder" id="mainImagePlaceholder">
-                    <div class="placeholder-text">MATEO<br>Mis 7 Años</div>
+                <img src="" alt="MATEO Mis 7 Años - Cars" id="mainCarsImage" style="display: none;" />
+                <div class="main-image-placeholder" id="mainImagePlaceholder" style="display: none;">
+                    <div class="placeholder-text">Imagen Principal</div>
                 </div>
             </div>
         </div>
@@ -502,12 +498,6 @@
                 mainCarsImage.style.display = 'none';
                 document.getElementById('mainImagePlaceholder').style.display = 'flex';
             }
-
-            // carros animados (src) - ARREGLÉ EL ERROR AQUÍ
-            const carMater = document.getElementById('carMater');
-            const carRayo = document.getElementById('carRayo');
-            if (partyConfig.carMaterUrl) carMater.src = partyConfig.carMaterUrl;
-            if (partyConfig.carRayoUrl) carRayo.src = partyConfig.carRayoUrl;
 
             // Google Maps: lógica de detección
             const mapsButton = document.getElementById('mapsButton');
