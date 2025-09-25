@@ -48,6 +48,21 @@
             box-shadow: inset 0 -10px 20px rgba(255, 255, 0, 0.3);
         }
 
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('LogoMateo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
         .racing-flags {
             position: absolute;
             top: 15px;
@@ -55,7 +70,7 @@
             transform: translateX(-50%);
             display: flex;
             gap: 20px;
-            z-index: 10;
+            z-index: 15;
         }
 
         .flag {
@@ -80,6 +95,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            z-index: 10;
         }
         .photo-circle img { width: 100%; height: 100%; object-fit: cover; transition: transform .25s ease; }
         .photo-circle img:hover { transform: scale(1.05); }
@@ -94,11 +111,57 @@
         .name {
             font-size: 3rem; color: #ffff00; text-shadow: 4px 4px 0 #000;
             margin: 15px 0 5px; font-weight: 900; letter-spacing: 3px;
+            position: relative;
+            z-index: 10;
+            display: none; /* Oculto porque se reemplaza con la imagen principal */
         }
 
         .age {
             font-size: 4.5rem; color: #fff; text-shadow: 4px 4px 0 #000;
             margin-bottom: 12px; font-weight: 900;
+            position: relative;
+            z-index: 10;
+            display: none; /* Oculto porque se reemplaza con la imagen principal */
+        }
+
+        /* Imagen principal de Cars */
+        .main-cars-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-cars-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+        }
+
+        .main-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+            border: 3px solid #ffff00;
+        }
+
+        .placeholder-text {
+            font-size: 2.5rem;
+            color: #ffff00;
+            text-shadow: 3px 3px 0 #000;
+            font-weight: 900;
+            text-align: center;
+            letter-spacing: 2px;
         }
 
         /* NUEVO: contenedor para las 2 imágenes cuadradas (debajo del número) */
@@ -107,6 +170,8 @@
             display: flex;
             justify-content: center; /* centra el bloque completo */
             margin-top: 8px;
+            position: relative;
+            z-index: 10;
         }
         .extra-photos {
             display: flex;
@@ -206,14 +271,14 @@
         /* Responsive */
         @media (max-width: 600px) {
             .invitation-container { margin: 10px; border-radius: 25px; max-width: 95%; }
-            .name { font-size: 2.5rem; letter-spacing: 2px; }
-            .age { font-size: 4rem; }
             .countdown-number { font-size: 2.2rem; }
             .car { width: 150px; }
             .car-animation-container { height: 140px; margin-top: -20px; }
             .title { font-size: 1.8rem; letter-spacing: 1px; }
-            .extra-photo-box { width: 110px; height: 110px; }
             .photo-circle { width: 120px; height: 120px; }
+            .main-cars-image { max-width: 100%; margin: 15px auto; }
+            .main-image-placeholder { height: 150px; }
+            .placeholder-text { font-size: 2rem; }
         }
 
         @media (max-width: 480px) {
@@ -224,6 +289,8 @@
             .maps-button { padding: 10px 16px; font-size: 1rem; }
             .car { width: 130px; }
             .car-animation-container { height: 120px; }
+            .main-image-placeholder { height: 120px; }
+            .placeholder-text { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -245,20 +312,11 @@
                 <div class="photo-placeholder" id="photoPlaceholder">👦</div>
             </div>
 
-            <div class="name" id="childName">MATEO</div>
-            <div class="age" id="childAge">7</div>
-
-            <!-- AQUÍ: recuadros cuadrados debajo del 7 -->
-            <div class="extra-photos-wrap" aria-hidden="false">
-                <div class="extra-photos" aria-label="Fotos extras">
-                    <div class="extra-photo-box">
-                        <img src="" alt="Extra izquierda" id="extraPhoto1" style="display:none;" />
-                        <div class="extra-placeholder" id="extraPlaceholder1">📸</div>
-                    </div>
-                    <div class="extra-photo-box">
-                        <img src="" alt="Extra derecha" id="extraPhoto2" style="display:none;" />
-                        <div class="extra-placeholder" id="extraPlaceholder2">📸</div>
-                    </div>
+            <!-- Imagen principal de Cars con MATEO -->
+            <div class="main-cars-image">
+                <img src="LogoMateo.png" alt="MATEO Mis 7 Años - Cars" id="mainCarsImage" style="display: none;" />
+                <div class="main-image-placeholder" id="mainImagePlaceholder">
+                    <div class="placeholder-text">MATEO<br>Mis 7 Años</div>
                 </div>
             </div>
         </div>
@@ -331,8 +389,7 @@
             displayTime: "3:30 P.M.",
             location: "2da Privada Lorenzo Angeles, El Pueblito, Corregidora, Qro.",
             photoUrl: "Niño-xd.jpg",      // foto principal
-            extraPhoto1: "MTP.jpg",       // recuadro izquierdo (si quieres)
-            extraPhoto2: "RYP.jpg",       // recuadro derecho (si quieres)
+            mainCarsImageUrl: "",         // NUEVA: la imagen principal de Cars que subiste
             carMaterUrl: "LogoMateo.png",
             carRayoUrl: "LogoMateo.png",
             mapsUrl: ""                   // PEGA AQUÍ la URL EXACTA de Google Maps (https://...) o deja vacío para usar la dirección de texto
@@ -435,18 +492,15 @@
                 document.getElementById('photoPlaceholder').style.display = 'flex';
             }
 
-            // fotos extras
-            if (partyConfig.extraPhoto1) {
-                const e1 = document.getElementById('extraPhoto1');
-                e1.src = partyConfig.extraPhoto1;
-                e1.style.display = 'block';
-                document.getElementById('extraPlaceholder1').style.display = 'none';
-            }
-            if (partyConfig.extraPhoto2) {
-                const e2 = document.getElementById('extraPhoto2');
-                e2.src = partyConfig.extraPhoto2;
-                e2.style.display = 'block';
-                document.getElementById('extraPlaceholder2').style.display = 'none';
+            // imagen principal de Cars
+            const mainCarsImage = document.getElementById('mainCarsImage');
+            if (partyConfig.mainCarsImageUrl) {
+                mainCarsImage.src = partyConfig.mainCarsImageUrl;
+                mainCarsImage.style.display = 'block';
+                document.getElementById('mainImagePlaceholder').style.display = 'none';
+            } else {
+                mainCarsImage.style.display = 'none';
+                document.getElementById('mainImagePlaceholder').style.display = 'flex';
             }
 
             // carros animados (src) - ARREGLÉ EL ERROR AQUÍ
