@@ -263,8 +263,6 @@
         @media (max-width: 600px) {
             .invitation-container { margin: 10px; border-radius: 25px; max-width: 95%; }
             .countdown-number { font-size: 2.2rem; }
-            .car { width: 150px; }
-            .car-animation-container { height: 140px; margin-top: -20px; }
             .title { font-size: 1.8rem; letter-spacing: 1px; }
             .photo-circle { width: 120px; height: 120px; }
             .main-cars-section { padding: 15px; }
@@ -279,8 +277,6 @@
             .content { padding: 30px 25px 45px; }
             .details { padding: 25px 20px; font-size: 1.1rem; }
             .maps-button { padding: 10px 16px; font-size: 1rem; }
-            .car { width: 130px; }
-            .car-animation-container { height: 120px; }
             .main-cars-section { padding: 10px; }
             .main-image-placeholder { height: 120px; }
             .placeholder-text { font-size: 1rem; }
@@ -310,7 +306,7 @@
         <!-- Imagen principal de Cars - FUERA del header para que se vea nítida -->
         <div class="main-cars-section">
             <div class="main-cars-image">
-                <img src="" alt="MATEO Mis 7 Años - Cars" id="mainCarsImage" style="display: none;" />
+                <img src="LogoMateo.png" alt="MATEO Mis 7 Años - Cars" id="mainCarsImage" style="display: none;" />
                 <div class="main-image-placeholder" id="mainImagePlaceholder" style="display: none;">
                     <div class="placeholder-text">Imagen Principal</div>
                 </div>
@@ -365,14 +361,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="track" aria-hidden="true"></div>
-
-        <div class="car-animation-container" aria-hidden="true">
-            <!-- Carros animados -->
-            <img src="LogoMateo.png" alt="Mate" class="car mate" id="carMater" />
-            <img src="LogoMateo.png" alt="Rayo McQueen" class="car rayo" id="carRayo" />
-        </div>
     </div>
 
     <script>
@@ -385,9 +373,7 @@
             displayTime: "3:30 P.M.",
             location: "2da Privada Lorenzo Angeles, El Pueblito, Corregidora, Qro.",
             photoUrl: "Niño-xd.jpg",      // foto principal
-            mainCarsImageUrl: "",         // NUEVA: la imagen principal de Cars que subiste
-            carMaterUrl: "LogoMateo.png",
-            carRayoUrl: "LogoMateo.png",
+            mainCarsImageUrl: "mateo-cars.png",  // PONER AQUÍ el nombre de tu imagen
             mapsUrl: ""                   // PEGA AQUÍ la URL EXACTA de Google Maps (https://...) o deja vacío para usar la dirección de texto
         };
 
