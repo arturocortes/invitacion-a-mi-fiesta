@@ -49,8 +49,8 @@
 
         .main-welcome-image {
             width: 100%;
-            max-width: 500px;
-            margin: 0 auto 15px;
+            max-width: 550px;
+            margin: 0 auto 20px;
             position: relative;
             display: flex;
             justify-content: center;
@@ -60,9 +60,10 @@
         .main-welcome-image img {
             width: 100%;
             height: auto;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
-            border: 3px solid #ffff00;
+            border-radius: 18px;
+            box-shadow: 0 0 35px rgba(255, 255, 0, 0.9);
+            border: 4px solid #ffff00;
+            transform: scale(1.08);
         }
 
         .welcome-image-placeholder {
@@ -96,32 +97,61 @@
 
         .racing-flags {
             position: absolute;
-            top: 10px;
+            top: 12px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 20px;
+            gap: 25px;
             z-index: 15;
         }
 
         .flag {
-            width: 75px; height: 38px;
+            width: 95px; height: 60px;
             background: repeating-conic-gradient( black 0deg 45deg, white 45deg 90deg );
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            animation: wave 2.5s ease-in-out infinite;
+            border-radius: 8px 4px 4px 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.7);
+            position: relative;
+            transform-origin: left center;
+            animation: flagWave 3s ease-in-out infinite;
+            overflow: hidden;
+        }
+        
+        .flag-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            animation: flagRipple 2.5s ease-in-out infinite;
             transform-origin: left center;
         }
-        .flag:nth-child(2) { animation-delay: 0.3s; }
-        @keyframes wave { 0%,100% { transform: rotate(-6deg);} 50% { transform: rotate(6deg);} }
+        
+        .flag:nth-child(1) { animation-delay: 0s; }
+        .flag:nth-child(2) { animation-delay: 0.4s; }
+        .flag:nth-child(1) .flag-wave { animation-delay: 0.2s; }
+        .flag:nth-child(2) .flag-wave { animation-delay: 0.6s; }
+        
+        @keyframes flagWave { 
+            0%, 100% { transform: rotate(-8deg) scaleX(0.95); }
+            25% { transform: rotate(-4deg) scaleX(0.98); }
+            50% { transform: rotate(0deg) scaleX(1.02); }
+            75% { transform: rotate(4deg) scaleX(0.98); }
+        }
+        
+        @keyframes flagRipple {
+            0%, 100% { transform: skewX(2deg) scaleY(0.98); }
+            33% { transform: skewX(-1deg) scaleY(1.02); }
+            66% { transform: skewX(3deg) scaleY(0.96); }
+        }
 
         .photo-circle {
             width: 150px; height: 150px;
             border-radius: 50%;
-            border: 4px solid #ffff00;
-            margin: 30px auto 10px;
+            border: 5px solid #ffff00;
+            margin: 45px auto 15px;
             overflow: hidden;
-            box-shadow: 0 0 15px #ffff00;
+            box-shadow: 0 0 25px #ffff00;
             background: #222;
             display: flex;
             align-items: center;
@@ -136,7 +166,7 @@
             width: 100%; height: 100%;
             background: linear-gradient(45deg, #ff4444, #cc0000);
             display: flex; align-items:center; justify-content:center;
-            font-size: 2.5rem; color: #ffff00; text-shadow: 2px 2px 4px #000; font-weight: 900;
+            font-size: 3.5rem; color: #ffff00; text-shadow: 2px 2px 4px #000; font-weight: 900;
         }
 
         .content {
@@ -218,27 +248,92 @@
         }
         @keyframes tireMarksShift { 0% { background-position: 0 0; } 100% { background-position: 100px 0; } }
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            .invitation-container { margin: 10px; border-radius: 25px; max-width: 95%; }
-            .countdown-number { font-size: 2.2rem; }
-            .title { font-size: 1.8rem; letter-spacing: 1px; }
-            .photo-circle { width: 100px; height: 100px; }
-            .welcome-section { padding: 15px 15px 10px; }
-            .main-welcome-image { max-width: 100%; }
-            .welcome-image-placeholder { height: 180px; }
-            .placeholder-text { font-size: 1.2rem; }
+        /* Responsive mejorado para todos los dispositivos */
+        
+        /* Extra Small devices (phones, 575px and down) */
+        @media (max-width: 575px) {
+            body { padding: 10px; }
+            .invitation-container { margin: 5px; max-width: 98%; }
+            .header { padding: 15px 10px; }
+            .racing-flags { gap: 18px; top: 8px; }
+            .flag { width: 65px; height: 42px; }
+            .photo-circle { width: 120px; height: 120px; margin: 30px auto 12px; border: 4px solid #ffff00; }
+            .photo-placeholder { font-size: 2.8rem; }
+            .welcome-section { padding: 10px; }
+            .main-welcome-image { max-width: 95%; transform: scale(1.05); }
+            .main-welcome-image img { transform: scale(1.02); border: 3px solid #ffff00; }
+            .welcome-image-placeholder { height: 160px; }
+            .placeholder-text { font-size: 0.9rem; }
+            .title { font-size: 1.5rem; margin-bottom: 20px; }
+            .countdown { padding: 15px 10px; margin: 15px auto 25px; }
+            .countdown-number { font-size: 1.8rem; }
+            .countdown-unit { padding: 10px 8px; min-width: 60px; }
+            .content { padding: 20px 15px 35px; }
+            .details { padding: 18px 12px; font-size: 1rem; }
+            .detail-icon { font-size: 1.5rem; }
+            .maps-button { padding: 8px 12px; font-size: 0.9rem; }
         }
 
-        @media (max-width: 480px) {
-            .flag { width: 50px; height: 30px; }
-            .photo-circle { width: 90px; height: 90px; }
-            .content { padding: 25px 20px 40px; }
-            .details { padding: 20px 15px; font-size: 1.1rem; }
-            .maps-button { padding: 10px 16px; font-size: 1rem; }
-            .welcome-section { padding: 10px; }
-            .welcome-image-placeholder { height: 150px; }
-            .placeholder-text { font-size: 1rem; }
+        /* Small devices (landscape phones, 576px and up) */
+        @media (min-width: 576px) and (max-width: 767px) {
+            .invitation-container { max-width: 95%; }
+            .flag { width: 78px; height: 50px; }
+            .photo-circle { width: 130px; height: 130px; }
+            .main-welcome-image img { transform: scale(1.04); }
+            .welcome-image-placeholder { height: 180px; }
+            .title { font-size: 1.7rem; }
+            .countdown-number { font-size: 2rem; }
+        }
+
+        /* Medium devices (tablets, 768px and up) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .invitation-container { max-width: 85%; }
+            .flag { width: 88px; height: 55px; }
+            .photo-circle { width: 140px; height: 140px; }
+            .main-welcome-image img { transform: scale(1.06); }
+            .welcome-image-placeholder { height: 220px; }
+            .title { font-size: 1.9rem; }
+            .countdown-number { font-size: 2.3rem; }
+        }
+
+        /* Large devices (desktops, 992px and up) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .invitation-container { max-width: 75%; }
+            .flag { width: 92px; height: 58px; }
+            .photo-circle { width: 145px; height: 145px; }
+            .main-welcome-image img { transform: scale(1.07); }
+            .welcome-image-placeholder { height: 240px; }
+            .title { font-size: 2rem; }
+        }
+
+        /* Extra large devices (large desktops, 1200px and up) */
+        @media (min-width: 1200px) {
+            .invitation-container { max-width: 650px; }
+            .flag { width: 100px; height: 65px; }
+            .photo-circle { width: 160px; height: 160px; }
+            .main-welcome-image img { transform: scale(1.1); }
+            .welcome-image-placeholder { height: 280px; }
+            .title { font-size: 2.2rem; }
+            .countdown-number { font-size: 2.8rem; }
+        }
+
+        /* Landscape orientation adjustments */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .invitation-container { margin: 5px auto; }
+            .header { padding: 10px 15px; }
+            .photo-circle { width: 100px; height: 100px; margin: 20px auto 8px; }
+            .welcome-section { padding: 8px; }
+            .main-welcome-image img { transform: scale(1.02); }
+            .content { padding: 15px 25px 30px; }
+            .countdown { padding: 12px 10px; margin: 15px auto 20px; }
+            .countdown-number { font-size: 1.8rem; }
+        }
+
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .flag { box-shadow: 0 4px 12px rgba(0,0,0,0.7); }
+            .photo-circle { box-shadow: 0 0 20px #ffff00; }
+            .main-welcome-image img { box-shadow: 0 0 35px rgba(255, 255, 0, 0.9); }
         }
     </style>
 </head>
@@ -282,15 +377,15 @@
                 <div class="countdown-title">🏁 TIEMPO PARA LA CARRERA 🏁</div>
                 <div class="countdown-display" id="countdown">
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-number" id="days">05</span>
                         <span class="countdown-label">DÍAS</span>
                     </div>
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-number" id="hours">05</span>
                         <span class="countdown-label">HORAS</span>
                     </div>
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="minutes">5</span>
+                        <span class="countdown-number" id="minutes">25</span>
                         <span class="countdown-label">MIN</span>
                     </div>
                     <div class="countdown-unit">
@@ -303,7 +398,7 @@
             <div class="details">
                 <div class="detail-item">
                     <span class="detail-icon" aria-hidden="true">📅</span>
-                    <strong>Fecha:</strong> <span id="partyDate">Octubre 13, 2025</span>
+                    <strong>Fecha:</strong> <span id="partyDate">Septiembre 17, 2025</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-icon" aria-hidden="true">⏰</span>
@@ -316,7 +411,7 @@
                 <div class="detail-item">
                     <span class="detail-icon" aria-hidden="true">🗺️</span>
                     <strong>Ver en Maps:</strong>
-                    <a href="https://www.google.com.mx/maps/place/2%C2%AA+Priv.+Lorenzo+Angeles,+El+Pueblito,+76900+El+Pueblito,+Qro./@20.5382687,-100.4415762,17z/data=!3m1!4b1!4m6!3m5!1s0x85d345800d8fc299:0x7396a7c1ca4e37ec!8m2!3d20.5382687!4d-100.4390013!16s%2Fg%2F1tkb5g62?entry=ttu&g_ep=EgoyMDI1MDkyMy4wIKXMDSoASAFQAw%3D%3D" id="mapsButton" class="maps-button" target="_blank" rel="noopener">
+                    <a href="#" id="mapsButton" class="maps-button" target="_blank" rel="noopener">
                         <span class="maps-icon">📍</span>
                         <span>Abrir Google Maps</span>
                     </a>
@@ -330,13 +425,13 @@
         const partyConfig = {
             childName: "MATEO",
             age: "7",
-            date: "2025-09-25",
-            time: "08:00 P.M",
-            displayTime: "08:00 P.M.",
+            date: "2025-09-17",
+            time: "15:30",
+            displayTime: "3:30 P.M.",
             location: "2da Privada Lorenzo Angeles, El Pueblito, Corregidora, Qro.",
             photoUrl: "Niño-xd.jpg",
             welcomeImageUrl: "LogoMateo.png",  // IMAGEN PRINCIPAL DE BIENVENIDA
-            mapsUrl: "https://www.google.com.mx/maps/place/2%C2%AA+Priv.+Lorenzo+Angeles,+El+Pueblito,+76900+El+Pueblito,+Qro./@20.5382687,-100.4415762,17z/data=!3m1!4b1!4m6!3m5!1s0x85d345800d8fc299:0x7396a7c1ca4e37ec!8m2!3d20.5382687!4d-100.4390013!16s%2Fg%2F1tkb5g62?entry=ttu&g_ep=EgoyMDI1MDkyMy4wIKXMDSoASAFQAw%3D%3D"
+            mapsUrl: ""
         };
 
         /* Helpers */
@@ -379,7 +474,7 @@
             if (diff <= 0) {
                 document.getElementById('days').textContent = '00';
                 document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '04';
+                document.getElementById('minutes').textContent = '00';
                 document.getElementById('seconds').textContent = '00';
                 clearInterval(countdownInterval);
                 return;
