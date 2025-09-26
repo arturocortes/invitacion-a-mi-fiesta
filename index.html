@@ -282,15 +282,15 @@
                 <div class="countdown-title">🏁 TIEMPO PARA LA CARRERA 🏁</div>
                 <div class="countdown-display" id="countdown">
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="days">05</span>
+                        <span class="countdown-number" id="days">00</span>
                         <span class="countdown-label">DÍAS</span>
                     </div>
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="hours">05</span>
+                        <span class="countdown-number" id="hours">00</span>
                         <span class="countdown-label">HORAS</span>
                     </div>
                     <div class="countdown-unit">
-                        <span class="countdown-number" id="minutes">25</span>
+                        <span class="countdown-number" id="minutes">5</span>
                         <span class="countdown-label">MIN</span>
                     </div>
                     <div class="countdown-unit">
@@ -330,9 +330,9 @@
         const partyConfig = {
             childName: "MATEO",
             age: "7",
-            date: "2025-10-13",
-            time: "15:30",
-            displayTime: "3:30 P.M.",
+            date: "2025-09-25",
+            time: "08:00",
+            displayTime: "08:00 P.M.",
             location: "2da Privada Lorenzo Angeles, El Pueblito, Corregidora, Qro.",
             photoUrl: "Niño-xd.jpg",
             welcomeImageUrl: "LogoMateo.png",  // IMAGEN PRINCIPAL DE BIENVENIDA
@@ -348,7 +348,7 @@
         }
         function formatDate(yyyy_mm_dd) {
             try {
-                const d = new Date(yyyy_mm_dd + 'T2025:10:13');
+                const d = new Date(yyyy_mm_dd + 'T00:00:00');
                 return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
             } catch (e) {
                 return yyyy_mm_dd;
