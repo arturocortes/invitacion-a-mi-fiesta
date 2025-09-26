@@ -398,11 +398,11 @@
             <div class="details">
                 <div class="detail-item">
                     <span class="detail-icon" aria-hidden="true">📅</span>
-                    <strong>Fecha:</strong> <span id="partyDate">Septiembre 17, 2025</span>
+                    <strong>Fecha:</strong> <span id="partyDate">Septiembre 25, 2025</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-icon" aria-hidden="true">⏰</span>
-                    <strong>Hora:</strong> <span id="partyTime">3:30 P.M.</span>
+                    <strong>Hora:</strong> <span id="partyTime">8:10 P.M.</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-icon" aria-hidden="true">📍</span>
@@ -425,9 +425,9 @@
         const partyConfig = {
             childName: "MATEO",
             age: "7",
-            date: "2025-09-17",
-            time: "15:30",
-            displayTime: "3:30 P.M.",
+            date: "2025-09-25",
+            time: "8:10",
+            displayTime: "8:10 P.M.",
             location: "2da Privada Lorenzo Angeles, El Pueblito, Corregidora, Qro.",
             photoUrl: "Niño-xd.jpg",
             welcomeImageUrl: "LogoMateo.png",  // IMAGEN PRINCIPAL DE BIENVENIDA
@@ -474,8 +474,8 @@
             if (diff <= 0) {
                 document.getElementById('days').textContent = '00';
                 document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
+                document.getElementById('minutes').textContent = '03';
+                document.getElementById('seconds').textContent = '30';
                 clearInterval(countdownInterval);
                 return;
             }
