@@ -21,7 +21,7 @@
             padding: 20px;
         }
 
-        .speed-particles { display: none; } /* mantengo ocultas las partículas pesadas */
+        .speed-particles { display: none; }
 
         .invitation-container {
             max-width: 600px;
@@ -39,9 +39,55 @@
 
         @keyframes slideIn { to { opacity: 1; transform: translateY(0); } }
 
+        /* NUEVA SECCIÓN: Imagen principal de bienvenida */
+        .welcome-section {
+            background: #111;
+            padding: 20px 20px 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        .main-welcome-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 15px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-welcome-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 255, 0, 0.8);
+            border: 3px solid #ffff00;
+        }
+
+        .welcome-image-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #333, #555);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+            border: 3px dashed #ffff00;
+        }
+
+        .placeholder-text {
+            font-size: 1.5rem;
+            color: #ffff00;
+            text-shadow: 1px 1px 2px #000;
+            font-weight: 700;
+            text-align: center;
+        }
+
         .header {
             background: linear-gradient(45deg, #ff0000, #cc0000);
-            padding: 30px 20px 20px;
+            padding: 20px 20px 15px;
             text-align: center;
             position: relative;
             overflow: visible;
@@ -50,7 +96,7 @@
 
         .racing-flags {
             position: absolute;
-            top: 15px;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -59,7 +105,7 @@
         }
 
         .flag {
-            width: 70px; height: 45px;
+            width: 60px; height: 35px;
             background: repeating-conic-gradient( black 0deg 45deg, white 45deg 90deg );
             border-radius: 6px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.5);
@@ -70,12 +116,12 @@
         @keyframes wave { 0%,100% { transform: rotate(-6deg);} 50% { transform: rotate(6deg);} }
 
         .photo-circle {
-            width: 130px; height: 130px;
+            width: 110px; height: 110px;
             border-radius: 50%;
-            border: 6px solid #ffff00;
-            margin: 40px auto 15px;
+            border: 4px solid #ffff00;
+            margin: 30px auto 10px;
             overflow: hidden;
-            box-shadow: 0 0 20px #ffff00;
+            box-shadow: 0 0 15px #ffff00;
             background: #222;
             display: flex;
             align-items: center;
@@ -90,101 +136,11 @@
             width: 100%; height: 100%;
             background: linear-gradient(45deg, #ff4444, #cc0000);
             display: flex; align-items:center; justify-content:center;
-            font-size: 3rem; color: #ffff00; text-shadow: 2px 2px 4px #000; font-weight: 900;
+            font-size: 2.5rem; color: #ffff00; text-shadow: 2px 2px 4px #000; font-weight: 900;
         }
-
-        .name {
-            font-size: 3rem; color: #ffff00; text-shadow: 4px 4px 0 #000;
-            margin: 15px 0 5px; font-weight: 900; letter-spacing: 3px;
-            position: relative;
-            z-index: 10;
-            display: none; /* Oculto porque se reemplaza con la imagen principal */
-        }
-
-        .age {
-            font-size: 4.5rem; color: #fff; text-shadow: 4px 4px 0 #000;
-            margin-bottom: 12px; font-weight: 900;
-            position: relative;
-            z-index: 10;
-            display: none; /* Oculto porque se reemplaza con la imagen principal */
-        }
-
-        /* Sección principal de la imagen - SIN fondo para que se vea nítida */
-        .main-cars-section {
-            background: #111;
-            padding: 20px;
-            margin: 0;
-        }
-
-        /* Imagen principal de Cars */
-        .main-cars-image {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .main-cars-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 0 25px rgba(255, 255, 0, 0.6);
-            /* Sin filtros ni efectos que puedan difuminar */
-        }
-
-        .main-image-placeholder {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, #333, #555);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
-            border: 2px dashed #ffff00;
-        }
-
-        .placeholder-text {
-            font-size: 1.5rem;
-            color: #ffff00;
-            text-shadow: 1px 1px 2px #000;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        /* NUEVO: contenedor para las 2 imágenes cuadradas (debajo del número) */
-        .extra-photos-wrap {
-            width: 100%;
-            display: flex;
-            justify-content: center; /* centra el bloque completo */
-            margin-top: 8px;
-            position: relative;
-            z-index: 10;
-        }
-        .extra-photos {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            align-items: center;
-            max-width: 340px; /* controla separación */
-        }
-        .extra-photo-box {
-            width: 130px; height: 130px;
-            border: 4px solid #ffcc00;
-            border-radius: 15px;
-            background: #222;
-            box-shadow: 0 0 15px #ff0000;
-            display: flex; align-items: center; justify-content: center;
-            overflow: hidden;
-        }
-        .extra-photo-box img { width: 100%; height: 100%; object-fit: cover; }
-        .extra-placeholder { font-size: 2rem; color: #ffcc00; }
 
         .content {
-            padding: 30px 30px 50px;
+            padding: 25px 30px 50px;
             text-align: center;
             background: #222;
             border-radius: 0 0 25px 25px;
@@ -196,14 +152,17 @@
             text-shadow: 2px 2px 0 #000; letter-spacing: 2px;
         }
 
-        .countdown { background: linear-gradient(45deg, #000, #330000); color: #ffff00;
+        .countdown { 
+            background: linear-gradient(45deg, #000, #330000); color: #ffff00;
             padding: 20px 15px; border-radius: 20px; margin: 20px auto 30px; max-width: 480px;
             box-shadow: inset 0 6px 12px rgba(255,255,0,0.5); user-select: none;
         }
         .countdown-title { font-size: 1.3rem; margin-bottom: 15px; color: #fff; font-weight:700; }
         .countdown-display { display:flex; justify-content: space-around; gap:15px; flex-wrap:wrap; }
-        .countdown-unit { background: #cc0000; padding: 15px 12px; border-radius: 15px; min-width:70px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.6); transition: background .3s ease; }
+        .countdown-unit { 
+            background: #cc0000; padding: 15px 12px; border-radius: 15px; min-width:70px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.6); transition: background .3s ease; 
+        }
         .countdown-unit:hover { background:#ff3300; box-shadow: 0 6px 12px rgba(255,51,0,0.8); }
         .countdown-number { font-size: 2.5rem; font-weight:900; display:block; text-shadow: 2px 2px 4px #000; }
         .countdown-label { font-size:1.1rem; margin-top:8px; font-weight:700; letter-spacing:1px; }
@@ -264,21 +223,21 @@
             .invitation-container { margin: 10px; border-radius: 25px; max-width: 95%; }
             .countdown-number { font-size: 2.2rem; }
             .title { font-size: 1.8rem; letter-spacing: 1px; }
-            .photo-circle { width: 120px; height: 120px; }
-            .main-cars-section { padding: 15px; }
-            .main-cars-image { max-width: 100%; }
-            .main-image-placeholder { height: 150px; }
+            .photo-circle { width: 100px; height: 100px; }
+            .welcome-section { padding: 15px 15px 10px; }
+            .main-welcome-image { max-width: 100%; }
+            .welcome-image-placeholder { height: 180px; }
             .placeholder-text { font-size: 1.2rem; }
         }
 
         @media (max-width: 480px) {
-            .flag { width: 60px; height: 40px; }
-            .photo-circle { width: 100px; height: 100px; }
-            .content { padding: 30px 25px 45px; }
-            .details { padding: 25px 20px; font-size: 1.1rem; }
+            .flag { width: 50px; height: 30px; }
+            .photo-circle { width: 90px; height: 90px; }
+            .content { padding: 25px 20px 40px; }
+            .details { padding: 20px 15px; font-size: 1.1rem; }
             .maps-button { padding: 10px 16px; font-size: 1rem; }
-            .main-cars-section { padding: 10px; }
-            .main-image-placeholder { height: 120px; }
+            .welcome-section { padding: 10px; }
+            .welcome-image-placeholder { height: 150px; }
             .placeholder-text { font-size: 1rem; }
         }
     </style>
@@ -290,6 +249,16 @@
         <div class="neon-border" aria-hidden="true"></div>
         <div class="tire-marks" aria-hidden="true"></div>
 
+        <!-- NUEVA SECCIÓN: Imagen principal de bienvenida ARRIBA -->
+        <div class="welcome-section">
+            <div class="main-welcome-image">
+                <img src="LogoMateo.png" alt="MATEO Mis 7 Años - Cars" id="welcomeImage" style="display: none;" />
+                <div class="welcome-image-placeholder" id="welcomeImagePlaceholder">
+                    <div class="placeholder-text">Imagen Principal de Bienvenida</div>
+                </div>
+            </div>
+        </div>
+
         <div class="header">
             <div class="racing-flags" aria-hidden="true">
                 <div class="flag" aria-label="Bandera a cuadros 1"></div>
@@ -299,17 +268,6 @@
             <div class="photo-circle" aria-label="Foto del cumpleañero">
                 <img src="Niño-xd.jpg" alt="Foto del niño" id="childPhoto" style="display: none;" />
                 <div class="photo-placeholder" id="photoPlaceholder">👦</div>
-            </div>
-
-        </div>
-
-        <!-- Imagen principal de Cars - FUERA del header para que se vea nítida -->
-        <div class="main-cars-section">
-            <div class="main-cars-image">
-                <img src="LogoMateo.png" alt="MATEO Mis 7 Años - Cars" id="mainCarsImage" style="display: none;" />
-                <div class="main-image-placeholder" id="mainImagePlaceholder" style="display: none;">
-                    <div class="placeholder-text">Imagen Principal</div>
-                </div>
             </div>
         </div>
 
@@ -349,7 +307,7 @@
                 </div>
                 <div class="detail-item">
                     <span class="detail-icon" aria-hidden="true">📍</span>
-                    <strong>Lugar:</strong> <span id="partyLocation">Calle Cualquiera 123, Cualquier Lugar</span>
+                    <strong>Lugar:</strong> <span id="partyLocation">2da Privada Lorenzo Angeles, El Pueblito, Corregidora, Qro.</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-icon" aria-hidden="true">🗺️</span>
@@ -368,13 +326,13 @@
         const partyConfig = {
             childName: "MATEO",
             age: "7",
-            date: "2025-09-17",           // YYYY-MM-DD
-            time: "15:30",                // HH:MM 24h
+            date: "2025-09-17",
+            time: "15:30",
             displayTime: "3:30 P.M.",
             location: "2da Privada Lorenzo Angeles, El Pueblito, Corregidora, Qro.",
-            photoUrl: "Niño-xd.jpg",      // foto principal
-            mainCarsImageUrl: "LogoMateo.png",  // PONER AQUÍ el nombre de tu imagen
-            mapsUrl: ""                   // PEGA AQUÍ la URL EXACTA de Google Maps (https://...) o deja vacío para usar la dirección de texto
+            photoUrl: "Niño-xd.jpg",
+            welcomeImageUrl: "LogoMateo.png",  // IMAGEN PRINCIPAL DE BIENVENIDA
+            mapsUrl: ""
         };
 
         /* Helpers */
@@ -382,7 +340,6 @@
             return /^https?:\/\//i.test(s);
         }
         function isLatLng(s) {
-            // simple check: "lat,lng" (números con posible - y punto)
             return /^-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?$/.test(s.trim());
         }
         function formatDate(yyyy_mm_dd) {
@@ -399,13 +356,10 @@
         let targetDate;
 
         function startCountdown() {
-            // Construct target date-time in local timezone
             const datePart = partyConfig.date;
             const timePart = partyConfig.time || "00:00";
-            // create Date from string "YYYY-MM-DDTHH:MM:00"
             targetDate = new Date(datePart + 'T' + timePart + ':00');
             if (isNaN(targetDate)) {
-                // fallback: treat as date-only
                 targetDate = new Date(datePart);
             }
 
@@ -419,7 +373,6 @@
             const now = new Date();
             let diff = targetDate - now;
             if (diff <= 0) {
-                // terminado
                 document.getElementById('days').textContent = '00';
                 document.getElementById('hours').textContent = '00';
                 document.getElementById('minutes').textContent = '00';
@@ -441,29 +394,13 @@
             document.getElementById('seconds').textContent = two(seconds);
         }
 
-        /* Ajusta tamaño de los recuadros extras para que coincidan con la foto del niño */
-        function syncExtraPhotoSize() {
-            const photo = document.querySelector('.photo-circle');
-            const boxes = document.querySelectorAll('.extra-photo-box');
-            if (!photo) return;
-            const rect = photo.getBoundingClientRect();
-            const size = Math.round(rect.width);
-            boxes.forEach(b => {
-                b.style.width = size + 'px';
-                b.style.height = size + 'px';
-            });
-        }
-
-        /* Inicialización: carga fotos, texto y maps */
+        /* Inicialización */
         function initializeInvitation() {
-            // textos
-            document.getElementById('childName').textContent = partyConfig.childName || '';
-            document.getElementById('childAge').textContent = partyConfig.age || '';
             document.getElementById('partyDate').textContent = formatDate(partyConfig.date);
             document.getElementById('partyTime').textContent = partyConfig.displayTime || partyConfig.time;
             document.getElementById('partyLocation').textContent = partyConfig.location || '';
 
-            // foto principal
+            // foto del niño
             const childPhoto = document.getElementById('childPhoto');
             if (partyConfig.photoUrl) {
                 childPhoto.src = partyConfig.photoUrl;
@@ -474,73 +411,39 @@
                 document.getElementById('photoPlaceholder').style.display = 'flex';
             }
 
-            // imagen principal de Cars
-            const mainCarsImage = document.getElementById('mainCarsImage');
-            if (partyConfig.mainCarsImageUrl) {
-                mainCarsImage.src = partyConfig.mainCarsImageUrl;
-                mainCarsImage.style.display = 'block';
-                document.getElementById('mainImagePlaceholder').style.display = 'none';
+            // IMAGEN PRINCIPAL DE BIENVENIDA (la que querías arriba)
+            const welcomeImage = document.getElementById('welcomeImage');
+            if (partyConfig.welcomeImageUrl) {
+                welcomeImage.src = partyConfig.welcomeImageUrl;
+                welcomeImage.style.display = 'block';
+                document.getElementById('welcomeImagePlaceholder').style.display = 'none';
             } else {
-                mainCarsImage.style.display = 'none';
-                document.getElementById('mainImagePlaceholder').style.display = 'flex';
+                welcomeImage.style.display = 'none';
+                document.getElementById('welcomeImagePlaceholder').style.display = 'flex';
             }
 
-            // Google Maps: lógica de detección
+            // Google Maps
             const mapsButton = document.getElementById('mapsButton');
             const mapsSrc = (partyConfig.mapsUrl || '').trim();
             if (mapsSrc) {
                 if (isUrl(mapsSrc)) {
-                    // si pegaste una URL completa la usamos tal cual
                     mapsButton.href = mapsSrc;
                 } else if (isLatLng(mapsSrc)) {
-                    // si pegaste "lat,lng" la convertimos a query (mostrar punto exacto)
                     mapsButton.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsSrc)}`;
                 } else {
-                    // si pegaste texto sin protocolo asumimos búsqueda
                     mapsButton.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsSrc)}`;
                 }
             } else {
-                // fallback: utiliza la dirección en texto
                 mapsButton.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(partyConfig.location || '')}`;
             }
 
-            // sincroniza tamaños de recuadros extras con la foto del niño
-            syncExtraPhotoSize();
-            // iniciar countdown
             startCountdown();
-            // animar entrada del contenedor (ya con CSS, pero forzamos visibilidad segura)
             document.querySelector('.invitation-container').style.opacity = '1';
         }
 
-        /* Llamadas iniciales y eventos */
         document.addEventListener('DOMContentLoaded', () => {
             initializeInvitation();
-            // ajustar tamaño al redimensionar
-            window.addEventListener('resize', syncExtraPhotoSize);
         });
-
-        /* (Opcional) Partículas - si las quieres activas quita display:none en CSS */
-        function createSpeedParticles() {
-            const container = document.getElementById('speedParticles');
-            if (!container) return;
-            function createParticle() {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.position = 'absolute';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.left = '-100px';
-                particle.style.width = (Math.random() * 100 + 50) + 'px';
-                particle.style.height = '4px';
-                particle.style.background = 'rgba(255,255,255,0.1)';
-                particle.style.opacity = Math.random() * 0.6 + 0.2;
-                particle.style.transform = 'skewX(-20deg)';
-                particle.style.filter = 'blur(1px)';
-                particle.style.animation = `particleMove ${(Math.random() * 1.5 + 0.8)}s linear forwards`;
-                container.appendChild(particle);
-                setTimeout(() => { if (particle.parentNode) particle.parentNode.removeChild(particle); }, 3000);
-            }
-            //setInterval(createParticle, 800);
-        }
     </script>
 </body>
 </html>
